@@ -1,0 +1,23 @@
+fazer o fluxo de prox level funcionar ok
+mostrar fases concluidasx de cada nivel em roadmap ok
+passar infos corretas em playerInfo ok
+exibir dados sobre o level no fim, como tentativas, numero de passos no modal ok
+dps que clicar em play, da um disabled, deixaar o cara exec dnv as acoes ok
+animar botoes de movs de acordo com os movs q tao sendo executados p da visib ok
+criar levels de fato ok
+criar lvls tutoriais ok
+control drag novos botoes copiam caras errados ok
+criar modais tutoriais ok
+colocar botao retry no modal sucess ok
+forma de salvar dados ok
+Ter um array pra cada level q registra a primeira e ultima tentativa ok
+Registrar tentativas ok
+Colocar uma ‘afronta’ a fazer um melhor algoritmo ok
+Ideia de algoritmo pra medir uso de eficiência de comandos com uso de funções
+help abre video yt nova guia ok
+controls abre modal com instrucoes ok
+audio toggle som
+ter uma indicacao no score quando usar bem funcoes?
+melhorar cenarios
+implementar config ok 
+colocar inimigos?

@@ -1,0 +1,142 @@
+
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <title>SCI-BOTS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./src/assets/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/png" href="src/assets/sprites/fly.png">
+  </head>
+  <body>
+    <a href="" id="youtubeTutorial" target="_blank">a</a>
+    <a href="" id="downloadAnchorElem"></a>
+  
+    <div class="container-area">
+      <div class="container">
+        <div class="box">
+          <div class="left-box">
+            <div class="area-tv">
+              <canvas id="game-on"></canvas>
+            </div>
+  
+            <div class="left-box-down-area">
+              <div class="area-btn-action-play">
+                <button class="btn-action-play btn-action-play-play disabled" disabled >
+                  <div class="btn-action-play-icon">
+                    <i class="fa fa-play"></i> 
+                  </div>
+                  <div>Play</div>
+                </button>
+                <button class="btn-action-play btn-action-play-restart disabled">
+                  <div class="btn-action-play-icon">
+                    <i class="fa fa-undo"></i>
+                  </div>
+                  <div>Restart actions</div>
+                </button>
+                <button class="btn-action-play btn-action-play-settings">
+                  <div class="btn-action-play-icon">
+                    <i class="fa fa-gear"></i>
+                  </div>
+                  <div>Settings</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="box droppable-box b1">
+          <span>Function 1 (F1)</span>
+          <div class="function-1 placeholders">
+            <div class="p1 btn-action-movement-placeholder"></div>
+            <div class="p2 btn-action-movement-placeholder"></div>
+            <div class="p3 btn-action-movement-placeholder"></div>
+            <div class="p4 btn-action-movement-placeholder"></div>
+            <div class="p5 btn-action-movement-placeholder"></div>
+            <div class="p6 btn-action-movement-placeholder"></div>
+            <div class="p7 btn-action-movement-placeholder"></div>
+            <div class="p8 btn-action-movement-placeholder"></div>
+            <div class="p9 btn-action-movement-placeholder"></div>
+            <div class="p10 btn-action-movement-placeholder"></div>
+          </div>
+        </div>
+  
+        <div class="box droppable-box b2">
+          <span>Function 2 (F2)</span>
+          <div class="function-2 placeholders">
+            <div class="p1 btn-action-movement-placeholder"></div>
+            <div class="p2 btn-action-movement-placeholder"></div>
+            <div class="p3 btn-action-movement-placeholder"></div>
+            <div class="p4 btn-action-movement-placeholder"></div>
+            <div class="p5 btn-action-movement-placeholder"></div>
+            <div class="p6 btn-action-movement-placeholder"></div>
+            <div class="p7 btn-action-movement-placeholder"></div>
+            <div class="p8 btn-action-movement-placeholder"></div>
+            <div class="p9 btn-action-movement-placeholder"></div>
+            <div class="p10 btn-action-movement-placeholder"></div>
+          </div>
+        </div>
+  
+        <div class="box droppable-box b3">
+          <span>Action list</span>
+          <div class="action-list placeholders">
+            <div class="p1 btn-action-movement-placeholder al al-1"></div>
+            <div class="p2 btn-action-movement-placeholder al al-2"></div>
+            <div class="p3 btn-action-movement-placeholder al al-3"></div>
+            <div class="p4 btn-action-movement-placeholder al al-4"></div>
+            <div class="p5 btn-action-movement-placeholder al al-5"></div>
+            <div class="p6 btn-action-movement-placeholder al al-6"></div>
+            <div class="p7 btn-action-movement-placeholder al al-7"></div>
+            <div class="p8 btn-action-movement-placeholder al al-8"></div>
+            <div class="p9 btn-action-movement-placeholder al al-9"></div>
+            <div class="p10 btn-action-movement-placeholder al al-10"></div>
+          </div>
+        </div>
+  
+        <div class="box">	
+          <!-- <div class="btn-left btn-action-movement" draggable="true">
+            <i class="fa fa-arrow-left"></i>
+          </div>
+          <div class="btn-jump btn-action-movement" draggable="true">
+            <i class="fa fa-arrow-up"></i>
+          </div>
+          <div class="btn-right btn-action-movement" draggable="true">
+            <i class="fa fa-arrow-right icon-btn-right"></i>
+          </div> -->
+
+          <div class="btn-left btn-action-movement btn-left-ui" draggable="true">
+            <i class="material-icons" style="font-size:30px">arrow_back</i>
+          </div>
+          <div class="btn-leftwall btn-action-movement btn-leftwall-ui" draggable="true">
+            <i class="material-icons" style="font-size:30px; transform: rotateX(180deg)">subdirectory_arrow_left</i>
+          </div>
+          <div class="btn-jump btn-action-movement btn-jump-ui" draggable="true">
+            <i class="material-icons" style="font-size:30px">arrow_upward</i>
+          </div>
+          <div class="btn-rightwall btn-action-movement btn-rightwall-ui" draggable="true">
+            <i class="material-icons" style="font-size:30px; transform: rotateX(180deg)">subdirectory_arrow_right</i>
+          </div>
+          <div class="btn-right btn-action-movement btn-right-ui" draggable="true">
+            <i class="material-icons" style="font-size:30px">arrow_forward</i>
+          </div>
+          <div class="btn-f1 btn-action-movement btn-f1-ui" draggable="true">
+            <span>F1</span>
+          </div>
+          <div class="btn-f2 btn-action-movement btn-f2-ui" draggable="true">
+            <span>F2</span>
+          </div>
+          <div class="btn-eat btn-action-movement btn-eat-ui" draggable="true">
+            <i class="material-icons" style="font-size:22px">restaurant</i>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script type="module" src="https://unpkg.com/kaboom@2000.2.10/dist/kaboom.js"></script> -->
+    <script type="module" src="./src/kaboom-lib.js"></script>
+    <script type="module" src="./src/layout.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
