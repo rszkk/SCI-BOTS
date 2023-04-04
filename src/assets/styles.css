@@ -265,3 +265,7 @@ a {
 .btn-action-play-play, .btn-action-play-restart {
   display: none;
 }
+
+#bgAudio {
+  display: none;
+}

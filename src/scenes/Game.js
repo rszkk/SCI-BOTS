@@ -54,7 +54,7 @@ export default function Game (playerInfo) {
     const playButton = document.querySelector('.btn-action-play-play');
     const restartButton = document.querySelector('.btn-action-play-restart');   
     const configButton = document.querySelector('.btn-action-play-settings')
-    restartAction();
+    // restartAction();
     k.gravity(0)
 
     const maps = [
@@ -149,15 +149,15 @@ export default function Game (playerInfo) {
         [
             [
             'a  aaaaaaa',
-            'a    aa  a',
-            'a        a',
-            'a         ',
+            'a    aa   ',
+            'a      a  ',
+            'a      a  ',
+            '          ',
             '         a',
-            '     aaa a',
-            'a  a   a  ',
-            'a  a   a  ',
-            'a  a   a  ',
-            'a  aaaaa  ',
+            'a  a   a a',
+            'a  a   a a',
+            'a  a   a a',
+            'a  aaaaa a',
             ],
             {
                 playerPosX: 60 + 30,
@@ -202,11 +202,11 @@ export default function Game (playerInfo) {
         'b': () => [k.sprite('wall-steel', {frame: 1}), 'wall-steel2', k.solid(), 'wall2', k.area(), k.scale(3.75)],
         'c': () => [k.sprite('wall-steel', {frame: 2}), 'wall-steel3', k.solid(), 'wall3', k.area(), k.scale(3.75)],
         'd': () => [k.sprite('wall-steel', {frame: 3}), 'wall-steel4', k.solid(), 'wall4', k.area(), k.scale(3.75)],
-        'e': () => [k.sprite('laser-headers', {frame: 0}), 'laser-headers1', k.solid(), 'laser-headers1', k.area(), k.scale(3.75)],
-        'f': () => [k.sprite('laser-headers', {frame: 1}), 'laser-headers2', k.solid(), 'laser-headers2', k.area(), k.scale(3.75)],
-        'g': () => [k.sprite('laser-headers', {frame: 2}), 'laser-headers3', k.solid(), 'laser-headers3', k.area(), k.scale(3.75)],
-        'h': () => [k.sprite('laser-headers', {frame: 3}), 'laser-headers4', k.solid(), 'laser-headers4', k.area(), k.scale(3.75)],
-        'i': () => [k.sprite('laser-headers', {frame: 4}), 'laser-headers5', k.solid(), 'laser-headers5', k.area(), k.scale(3.75)],
+        'e': () => [k.sprite('laser-headers', {frame: 0}), 'laser-headers1 dangerous', k.solid(), 'laser', k.area(), k.scale(3.75)],
+        'f': () => [k.sprite('laser-headers', {frame: 1}), 'laser-headers2 dangerous', k.solid(), 'laser', k.area(), k.scale(3.75)],
+        'g': () => [k.sprite('laser-headers', {frame: 2}), 'laser-headers3 dangerous', k.solid(), 'laser', k.area(), k.scale(3.75)],
+        'h': () => [k.sprite('laser-headers', {frame: 3}), 'laser-headers4 dangerous', k.solid(), 'laser', k.area(), k.scale(3.75)],
+        'i': () => [k.sprite('laser-headers', {frame: 4}), 'laser-headers5 dangerous', k.solid(), 'laser', k.area(), k.scale(3.75)],
         'j': () => [k.sprite('laser-horizontal', {frame: 0}), 'dangerous', k.solid(), 'laser', k.area(),  k.scale(3.75)],
         'k': () => [k.sprite('laser-vertical', {frame: 0}), 'dangerous', k.solid(), 'laser', k.area(),  k.scale(3.75)],
         // d: [sprite('brick-red'), 'wall-brick-dool', solid(), 'wall'],
@@ -347,8 +347,7 @@ export default function Game (playerInfo) {
     }
 
     const playerDie = async () => {
-        // console.log('2hasWonLevel', hasWonLevel)
-        if (!hasWonLevel) {
+        if (!hasWonLevel && !isDead) {
             isDead = true;
             attempts += 1;
             const die = k.play("die", {
@@ -682,7 +681,7 @@ export default function Game (playerInfo) {
     // }
 
     const checkPlayerFacingPos = (orientation) => {
-        // console.log('rotacionou');
+        if (isDead) return;
         if (orientation === 'left') {
             if (player.angle === 0) rotate('faceRight');
             else if (player.angle === 90) rotate('faceUp');
@@ -732,11 +731,8 @@ export default function Game (playerInfo) {
                 volume: 0.3,
             })
             setTimeout(() => {
-                // console.log('comeu')
                 k.destroy(enemy)
-                // tocar som q comeu
                 hasWonLevel = true;
-                // console.log('1hasWonLevel', hasWonLevel)
                 attempts += 1;
                 score = getScore();
                 playerInfo.completedLevelsInfo[playerInfo.choosedLevel][completedLevelInnerIndex] = {
@@ -761,6 +757,7 @@ export default function Game (playerInfo) {
             // console.log(`--iniciais-->\nx:${player.pos.x+30}, y:${player.pos.y+30}`)
             const btn = document.querySelector(`.btn-${action}-ui`)
             btn.style.backgroundColor = 'rgba(47, 199, 89, 0.7)';
+            btn.style.border = '4px solid rgba(60, 140, 100)'
 
             if (action === 'eat') await eatFly();
             if (action === 'right') await goRight();
@@ -776,6 +773,7 @@ export default function Game (playerInfo) {
             await new Promise((resolve, reject) => {
                 setTimeout(() => {
                     btn.style.backgroundColor = 'white'
+                    btn.style.border = 'none'
                     resolve();
                 }, 200)
             })
@@ -788,15 +786,15 @@ export default function Game (playerInfo) {
     // k.onKeyDown('down', () => moveDown())
     // k.onKeyDown('left', () => moveLeft())
 
-    // k.onCollide('player', 'laser', (p, f) => {
-    //     console.log('bateu laser')
-    //     // tocar som morte
-    //     // 
-    // })
+    if (!isDead) {
+        k.onCollide('player', 'laser', (p, f) => {
+            console.log('hit laser')
+            playerDie();
+        })
+    }
 
     const retry = () => {
-        console.log('retry')
-        restartAction();
+        // restartAction();
         playButton.removeAttribute('disabled')
         playButton.style.cursor = 'pointer'
         restartButton.removeAttribute('disabled')
@@ -815,6 +813,15 @@ export default function Game (playerInfo) {
     }
 
     const goNextLevel = () => {
+        restartAction();
+        playerInfo.completedLevelsInfo[playerInfo.choosedLevel][completedLevelInnerIndex] = {
+            levelIndex: playerInfo.choosedLevel + 1,
+            movements,
+            score,
+            attempts,
+            timeStart,
+            timeEnd,
+        }
         k.go('game', {...playerInfo, choosedLevel: playerInfo.choosedLevel+1});
     }
 
@@ -999,7 +1006,7 @@ export default function Game (playerInfo) {
         ])
         back.radius = 10;
 
-        const retry = k.add([
+        const retryy = k.add([
             k.rect(50, 50),
             k.pos(k.width() * 0.5 - 25, k.height() * 0.5 + 105),
             k.layer('modalBtn'),
@@ -1008,11 +1015,11 @@ export default function Game (playerInfo) {
             k.opacity(0.9),
             'btn-retry'
         ])
-        retry.radius = 10;
+        retryy.radius = 10;
         const retryIcon = k.add([
             k.sprite('retryIcon'),
             k.origin('center'),
-            k.pos(retry.pos.x + 24.5, retry.pos.y + 25),
+            k.pos(retryy.pos.x + 24.5, retryy.pos.y + 25),
             k.scale(0.025),
             k.area(),
             k.layer('modalText'),
@@ -1144,7 +1151,7 @@ export default function Game (playerInfo) {
             k.go('roadmap', playerInfo);
         });
         k.onClick('btn-retry', (b) => {
-            k.go('game', playerInfo);
+            retry()
         });
         k.onClick('btn-next', (b) => {
             // k.destroy(bg1);

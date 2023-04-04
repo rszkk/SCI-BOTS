@@ -1,16 +1,25 @@
 import k from '../kaboom.js';
-import { configModal } from './HomeScreen.js';
+import { configModal, bgAudio, initialAudioState } from './HomeScreen.js';
+import { restartAction } from './../layout.js'
 
 k.loadSprite('roadmapBg', 'assets/sprites/roadmap.png');
 
 
 export function Roadmap (playerInfo) {    
     console.log('roadmap->', playerInfo)
-    if (k.audioCtx.state === 'suspended') {
-        const bgSong = k.play("bgSong", {
-            volume: 0.2,
-            loop: true,
-        })
+    restartAction();
+    // if (k.audioCtx.state === 'suspended') {
+    //     const bgSong = k.play("bgSong", {
+    //         volume: 0.2,
+    //         loop: true,
+    //     })
+    // }
+    console.log(playerInfo.isAudioPaused)
+    if (bgAudio.paused && initialAudioState) {
+        bgAudio.loop = true;
+        bgAudio.volume = 0.2;
+        bgAudio.load();
+        bgAudio.play();
     }
 
     const playButton = document.querySelector('.btn-action-play-play');

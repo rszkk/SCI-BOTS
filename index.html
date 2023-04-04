@@ -12,6 +12,9 @@
   <body>
     <a href="" id="youtubeTutorial" target="_blank">a</a>
     <a href="" id="downloadAnchorElem"></a>
+    <audio id="bgAudio" controls allow="autoplay">
+      <source src="./src/assets/audio/bgSong.mp3" type="audio/mp3">
+    </audio>
   
     <div class="container-area">
       <div class="container">
@@ -94,7 +97,7 @@
           </div>
         </div>
   
-        <div class="box">	
+        <div class="box box-al">	
           <!-- <div class="btn-left btn-action-movement" draggable="true">
             <i class="fa fa-arrow-left"></i>
           </div>
@@ -135,6 +138,7 @@
     </div>
 
     <!-- <script type="module" src="https://unpkg.com/kaboom@2000.2.10/dist/kaboom.js"></script> -->
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script type="module" src="./src/kaboom-lib.js"></script>
     <script type="module" src="./src/layout.js"></script>
     <script type="module" src="./src/main.js"></script>

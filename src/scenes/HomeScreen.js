@@ -1,9 +1,12 @@
 import k from '../kaboom.js';
 
-let tutorial1ScreenIndex = 0;
+let tutorial1ScreenIndex = 0
+export let initialAudioState = true;
 
+export const bgAudio = document.querySelector('#bgAudio')
 
 export function HomeScreen (playerInfo) {
+   
     console.log('HomeScreen->', playerInfo)
 
     const titleText = k.add([
@@ -192,16 +195,24 @@ export const configModal = (playerInfo, goBackScreen) => {
             o.color = aux ? k.MAGENTA : k.BLACK;
             o.scale = aux ? 1.05 : 1 ;
         });
+        k.every('audio', (a) => {
+            a.opacity = bgAudio.paused ? 0.5 : 1;
+        })
     })
-    k.onClick('audio', () => {
-        if (k.audioCtx.state !== 'suspended') {
-            // bgSong.unloop()
-            // bgSong.stop()
+    k.onClick('audio', (a) => {
+        if (bgAudio.paused) {
+            bgAudio.loop = true;
+            bgAudio.volume = 0.2;
+            bgAudio.load();
+            bgAudio.play();
+        } else {
+            bgAudio.pause();
+            initialAudioState = false;
         }
     })
     k.onClick('tutorial', () => {
         const a = document.getElementById('youtubeTutorial');
-        a.setAttribute("href", "https://www.youtube.com");
+        a.setAttribute("href", "https://youtu.be/HrCd2f0bveo");
         a.click();
     })
     k.onClick('download', () => {
@@ -212,7 +223,6 @@ export const configModal = (playerInfo, goBackScreen) => {
     })
     k.onClick('Controls', () => {
         k.go('tutorial1', playerInfo, goBackScreen)
-        // tutorialModal(playerInfo, )
     });
     k.onClick('btn-back', (b) => {
         k.destroy(bg1);
@@ -271,4 +281,4 @@ export const tutorialModal = (playerInfo, goBackScreen) => {
     });
 }
 
-export default {HomeScreen, configModal};
+export default {HomeScreen, configModal, bgAudio, initialAudioState};
